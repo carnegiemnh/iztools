@@ -252,8 +252,8 @@ Flea Name: <input type="text" name="name" id="name" size="25" autocomplete="off"
 					<td><label>Date</label><br/><input type="text" name="fleadata[0][date]" size="11" value="<?=$row['date']?>"/></td>
 					<td><label>Country <a href="#" tabindex="-1" onclick="dwcDoc('country')" class="info">&#9432;</a></label><br/><input type="text" class="country" name="fleadata[0][country]" size="25" value="<?=$row['country']?>"/></td>
 					<td><label>State/Province <a href="#" tabindex="-1" onclick="dwcDoc('stateProvince')" class="info">&#9432;</a></label><br/><input type="text" name="fleadata[0][stateprovince]" size="25" value="<?=$row['stateprovince']?>"/></td>
-					<td><label>Elevation <a href="#" tabindex="-1" onclick="dwcDoc('minimumElevationInMeters')" class="info">&#9432;</a></label><br/><input type="text" name="fleadata[0][elevation]" style="width: 72px;"/><input type="button" value="=" onclick="convertelevation(0);return false;"/></td>
-					<td><label>Associated Collectors</label><br/><input type="text" name="fleadata[0][associatedcollectors]" size="28"/></td>
+					<td><label>Elevation <a href="#" tabindex="-1" onclick="dwcDoc('minimumElevationInMeters')" class="info">&#9432;</a></label><br/><input type="text" pattern="-?\d[\d\.]*" name="fleadata[0][elevation]" style="width: 72px;"/><input type="button" value="=" onclick="convertelevation(0);return false;"/></td>
+					<td><label>Associated Collectors (not Traub)</label><br/><input type="text" name="fleadata[0][associatedcollectors]" size="28"/></td>
 				</tr>
 			</table>
 			<table class="output" border="0" cellspacing="0">
