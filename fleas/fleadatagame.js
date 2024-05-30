@@ -46,6 +46,24 @@ function namelookup( input ) {
 	});
 }
 
+function convertelevation( arrayindex ) {
+	elevation = $( "input[name='fleadata["+arrayindex+"][elevation]']" ).val();
+	re = /(\d[\d\.,]*)\s*[f']/i;
+	found = elevation.match(re);
+	if (found && typeof found[1] !== 'undefined') {
+		elevation = found[1].replace(',', '');
+		elevation = Math.round(parseInt(elevation)*.3048);
+		$( "input[name='fleadata["+arrayindex+"][elevation]']" ).val( elevation );
+	} else {
+		re = /\d[\d\.,]*/i;
+		found = elevation.match(re);
+		if (found && typeof found[0] !== 'undefined') {
+			elevation = found[0].replace(',', '');
+			$( "input[name='fleadata["+arrayindex+"][elevation]']" ).val( elevation );
+		}
+	}
+}
+
 function closeRecord( recordNumber ) {
 	$( "table#record"+recordNumber ).remove();
 	$( "#fill"+recordNumber ).remove();
@@ -72,7 +90,7 @@ function addRecord() {
 					<td><label>Date</label><br/><input type="text" name="fleadata[`+arrayindex+`][date]" size="11"/></td>
 					<td><label>Country <a href="#" tabindex="-1" onclick="dwcDoc('country')" class="info">&#9432;</a></label><br/><input type="text" class="country" name="fleadata[`+arrayindex+`][country]" size="25"/></td>
 					<td><label>State/Province <a href="#" tabindex="-1" onclick="dwcDoc('stateProvince')" class="info">&#9432;</a></label><br/><input type="text" name="fleadata[`+arrayindex+`][stateprovince]" size="25"/></td>
-					<td><label>Elevation <a href="#" tabindex="-1" onclick="dwcDoc('minimumElevationInMeters')" class="info">&#9432;</a></label><br/><input type="number" name="fleadata[`+arrayindex+`][elevation]" style="width: 72px;"/></td>
+					<td><label>Elevation <a href="#" tabindex="-1" onclick="dwcDoc('minimumElevationInMeters')" class="info">&#9432;</a></label><br/><input type="text" name="fleadata[`+arrayindex+`][elevation]" style="width: 72px;"/><input type="button" value="=" onclick="convertelevation(`+arrayindex+`);return false;"/></td>
 					<td><label>Associated Collectors</label><br/><input type="text" name="fleadata[`+arrayindex+`][associatedcollectors]" size="32"/></td>
 				</tr>
 			</table>
