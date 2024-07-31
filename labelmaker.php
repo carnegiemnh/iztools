@@ -41,7 +41,7 @@ if ( $_POST ) {
 		$lines = explode( "\n", $_POST['label'] );
 		foreach ( $lines as $line ) {
 			$line = rtrim( $line );
-			$lineLengths[] = strlen( $line );
+			$lineLengths[] = mb_strlen( $line, 'UTF-8' );
 		}
 		$maxLength = max( $lineLengths );
 		$pageWidth = intval( $_POST['pagewidth'] ) ?? 225;
@@ -54,6 +54,7 @@ if ( $_POST ) {
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<meta charset="utf-8">
 	<meta http-equiv="Content-Language" content="en-us">
 	<title>Label Maker</title>
 
@@ -125,7 +126,7 @@ if ( $lines ) {
 		print( '<div style="margin: 2px 0;">' );
 		foreach ( $lines as $line ) {
 			$line = rtrim( $line );
-			$numSpaces = $maxLength - strlen( $line ) + 1;
+			$numSpaces = $maxLength - mb_strlen( $line, 'UTF-8' ) + 1;
 			for ( $x = 1; $x <= $labelNumber; $x++ ) {
 				$line = str_replace( ' ', '&nbsp;', $line );
 				print( $line );
