@@ -118,6 +118,10 @@ if ( $row['id'] ) {
 				$flea['country'] = mysqli_real_escape_string( $link, $flea['country'] );
 				$flea['stateprovince'] = mysqli_real_escape_string( $link, $flea['stateprovince'] );
 				$flea['locality'] = mysqli_real_escape_string( $link, $flea['locality'] );
+				$flea['associatedcollectors'] = mysqli_real_escape_string( $link, $flea['associatedcollectors'] );
+				$flea['elevation'] = mysqli_real_escape_string( $link, $flea['elevation'] );
+				$flea['date'] = mysqli_real_escape_string( $link, $flea['date'] );
+				
 				$query = "INSERT INTO `traubdataprocessed` (`originalid`, `accession`, `host`, `date`, `locality`, `country`, `stateprovince`, `elevation`, `associatedcollectors`, `sciname`, `scientificnameauthorship`, `sex`, `individualcount`, `player`) VALUES ('{$row['id']}', '{$row['accession']}', '{$flea['host']}', {$date}, '{$flea['locality']}', '{$flea['country']}', '{$flea['stateprovince']}', '{$flea['elevation']}', '{$flea['associatedcollectors']}', '{$flea['sciname']}', '{$flea['scientificnameauthorship']}', '{$flea['sex']}', '{$flea['individualcount']}', {$playerid});";
 				$result2 = mysqli_query( $link, $query );
 				if ( !$result2 ) {
