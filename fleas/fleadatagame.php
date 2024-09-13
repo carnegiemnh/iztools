@@ -9,6 +9,8 @@ include 'db.conf.php';
 $errors = [];
 $accession = null;
 $playerid = null;
+$playername = null;
+$playerscore = null;
 $playerposition = null;
 $previd = 0;
 $nextid = 0;
