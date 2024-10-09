@@ -21,6 +21,7 @@ function sendOutput( $data, $httpHeaders=array() ) {
 
 function getFlea( $abbrev ) {
 	global $link, $strErrorDesc;
+	$abbrev = trim( mysqli_real_escape_string( $link, $abbrev ) );
 	$flea = NULL;
 	$result = mysqli_query( $link, "SELECT * FROM `traubabbrv` WHERE `abbrev` LIKE '".$abbrev."' LIMIT 1;" );
 	if ( $result ) {

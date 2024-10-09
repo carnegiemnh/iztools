@@ -21,6 +21,7 @@ function sendOutput( $data, $httpHeaders=array() ) {
 
 function getFlea( $fleaname ) {
 	global $link, $strErrorDesc;
+	$fleaname = trim( mysqli_real_escape_string( $link, $fleaname ) );
 	$flea = NULL;
 	$result = mysqli_query( $link, "SELECT * FROM `fleanames` WHERE `scientificName` LIKE '".$fleaname."' LIMIT 1;" );
 	if ( $result ) {
@@ -30,6 +31,17 @@ function getFlea( $fleaname ) {
 			$flea['authority'] = $row['authorship'];
 			$flea['status'] = $row['status'];
 			$flea['validName'] = $row['validName'];
+		} else {
+			$result = mysqli_query( $link, "SELECT * FROM `fleanames` WHERE `scientificName` LIKE '%".$fleaname."%' LIMIT 1;" );
+			if ( $result ) {
+				$row = mysqli_fetch_array( $result );
+				if ( $row ) {
+					$flea['name'] = $row['scientificName'];
+					$flea['authority'] = $row['authorship'];
+					$flea['status'] = $row['status'];
+					$flea['validName'] = $row['validName'];
+				}
+			}
 		}
 	} else {
 		$strErrorDesc = "Database query failed.";
@@ -39,7 +51,7 @@ function getFlea( $fleaname ) {
 
 parse_str( $_SERVER['QUERY_STRING'], $query );
 
-if ( isset( $query['name'] ) ) {
+if ( isset( $query['name'] ) && $query['name'] ) {
 	$responseData = json_encode( getFlea( $query['name'] ) );
 } else {
 	$strErrorDesc = "No name specified.";
