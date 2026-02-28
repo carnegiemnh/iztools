@@ -197,7 +197,7 @@ if ( $_POST ) {
 				}
 			}
 			if ( count( $specieslist ) > 1 ) {
-				sleep(5);
+				sleep(4);
 			}
 		}
 	}
